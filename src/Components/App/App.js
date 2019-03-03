@@ -8,15 +8,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Route
-          exact
-          path={`${process.env.PUBLIC_URL}/`}
-          component={MovieView}
-        />
-        <Route
-          path={`${process.env.PUBLIC_URL}/:id`}
-          component={MovieDetails}
-        />
+        <Route exact path={`/`} component={MovieView} />
+        <Route path={`/:id`} component={MovieDetails} />
       </div>
     );
   }
