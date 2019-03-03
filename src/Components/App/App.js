@@ -9,8 +9,15 @@ class App extends Component {
     return (
       <div className="App">
         <Switch>
-          <Route exact path="/" component={MovieView} />
-          <Route path="/:id" component={MovieDetails} />
+          <Route
+            exact
+            path={`${process.env.PUBLIC_URL}/`}
+            component={MovieView}
+          />
+          <Route
+            path={`${process.env.PUBLIC_URL}/:id`}
+            component={MovieDetails}
+          />
         </Switch>
       </div>
     );
