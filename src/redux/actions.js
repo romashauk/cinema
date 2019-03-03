@@ -29,7 +29,6 @@ export function getFilm(currentPage, searchQuery, id, sort, findId) {
         }&page=${currentPage}${
           sort === 'top_rated' ? `&vote_count.gte=100` : ''
         }${id ? `&with_genres=${id}` : ''}`;
-  console.log(dataURl);
   return dispatch => {
     dispatch({ type: GET_MOVIES_REQUEST });
 
