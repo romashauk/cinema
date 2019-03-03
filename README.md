@@ -1,2 +1,2 @@
 It`s a Cinema project
-https://romashauk-cinema.netlify.com/
+https://romashauk.github.io/cinema/

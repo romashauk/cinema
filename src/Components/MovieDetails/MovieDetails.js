@@ -18,11 +18,7 @@ class MovieDetails extends Component {
       return (
         <section className="details">
           <div className="container">
-            <Link
-              className="details__btn"
-              onClick={() => getFilm(1)}
-              to={`${process.env.PUBLIC_URL}/`}
-            >
+            <Link className="details__btn" onClick={() => getFilm(1)} to={`/`}>
               <button>Back</button>
             </Link>
             {movieById.poster_path ? (
