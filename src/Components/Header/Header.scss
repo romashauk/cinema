@@ -1,0 +1,39 @@
+.header {
+  min-height: 80px;
+  background: #303030;
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 150px;
+  &__logo {
+    background-image: url(../../logo.png);
+    width: 70px;
+    height: 70px;
+    background-size: cover;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  &__field {
+    margin-left: 200px;
+  }
+  input {
+    width: 500px;
+    padding: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    border: 1px solid black;
+    font-weight: 700;
+  }
+  button {
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 10px;
+    margin-left: 10px;
+    transition: 0.5s;
+    &:hover {
+      color: black;
+      background: white;
+      border: 1px solid black;
+    }
+  }
+}

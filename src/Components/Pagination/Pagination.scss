@@ -1,0 +1,40 @@
+.Pagination {
+  margin: 50px;
+  font-family: sans-serif;
+  color: yellow;
+  font-weight: 700;
+
+  &__nav {
+    display: flex;
+    justify-content: center;
+
+    &-btn {
+      padding: 10px;
+      cursor: pointer;
+
+      &--active {
+        background: #2e859e;
+        color: #fff;
+      }
+    }
+    .front {
+      border: none;
+      background: transparent;
+      color: yellow;
+      font-weight: 700;
+      text-transform: uppercase;
+      border: 1px solid white;
+      margin: 0 15px;
+    }
+  }
+}
+@media screen and (max-width: 940px) {
+  .Pagination {
+    margin: 30px;
+    y &__nav {
+      &-btn {
+        padding: 2px;
+      }
+    }
+  }
+}
