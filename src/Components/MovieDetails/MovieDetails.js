@@ -9,16 +9,48 @@ class MovieDetails extends Component {
     const { id } = this.props.match.params;
     this.props.dispatch(actions.getMovieById(id));
   }
+  rateCreater = rate => {
+    const rateRes = [];
+    let rateRound = Math.floor(rate);
+    for (let i = 0; i < rateRound; i++) {
+      rateRes.push(1);
+    }
+    if (rate - rateRound >= 0.5) {
+      rateRes.push(2);
+    }
+    if (Math.round(rate) < 9 || rate < 8) {
+      let min = Math.ceil(9 - rate);
+      for (let i = 0; i < min; i++) {
+        rateRes.push(0);
+      }
+      if (rate - rateRound >= 0.5) {
+        rateRes.pop();
+      }
+    }
+    return (
+      <>
+        {rate === 0
+          ? null
+          : rateRes.map(item =>
+              item === 1 ? (
+                <i class="fas fa-star" />
+              ) : <i class="fas fa-star-half-alt" /> || item === 0 ? (
+                <i class="far fa-star" />
+              ) : null
+            )}
+      </>
+    );
+  };
   render() {
-    const { movieById, getFilm } = this.props;
-    if (!this.props.moviesLoading || !movieById) {
+    const { movieById, moviesLoading } = this.props;
+    if (!moviesLoading || !movieById) {
       return <Loader />;
     }
-    if (this.props.moviesLoading && movieById) {
+    if (moviesLoading && movieById) {
       return (
         <section className="details">
           <div className="container">
-            <Link className="details__btn" onClick={() => getFilm(1)} to="/">
+            <Link className="details__btn" to="/">
               <button>Back</button>
             </Link>
             {movieById.poster_path ? (
@@ -42,6 +74,12 @@ class MovieDetails extends Component {
                 <p>{movieById.release_date.split('-')[0]}</p>
               </div>
               <div className="details__title">
+                <h2>Rate:</h2>
+                <p className="details__rated">
+                  {this.rateCreater(movieById.vote_average)}
+                </p>
+              </div>
+              <div className="details__title">
                 <h2>Country:</h2>
                 <p>
                   {typeof movieById['production_countries'] == !undefined
@@ -49,10 +87,13 @@ class MovieDetails extends Component {
                     : false}
                 </p>
               </div>
-              <div className="details__title">
-                <h2>Runtime:</h2>
-                <p>{movieById.runtime} min</p>
-              </div>
+              {movieById.runtime ? (
+                <div className="details__title">
+                  <h2>Runtime:</h2>
+                  <p>{movieById.runtime} min</p>
+                </div>
+              ) : null}
+
               <div className="details__title">
                 <h2>Genres:</h2>
                 <p>
@@ -73,12 +114,11 @@ class MovieDetails extends Component {
   }
 }
 const mapStateToProps = state => {
-  const { movieById, moviesLoading, getFilm } = state;
+  const { movieById, moviesLoading } = state;
 
   return {
     movieById,
     moviesLoading,
-    getFilm,
   };
 };
 export default connect(mapStateToProps)(MovieDetails);

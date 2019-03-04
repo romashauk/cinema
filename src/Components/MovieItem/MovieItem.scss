@@ -25,10 +25,23 @@
     cursor: pointer;
     vertical-align: top;
     line-height: 20px;
+    &-rated {
+      position: absolute;
+      top: 30px;
+      left: 0;
+      width: 90%;
+      text-align: center;
+      color: yellow;
+    }
     a {
       text-decoration: none;
     }
-
+    .fullStar {
+      width: 15px;
+      height: 15px;
+      background-image: url(../../img/star_rate.png);
+      background-size: cover;
+    }
     &-poster {
       position: relative;
       border: 5px solid #f5f5f5;
@@ -47,7 +60,7 @@
         filter: blur(11px);
       }
       &--unfound {
-        background: url(../../notFound.jpg);
+        background: url(../../img/notFound.jpg);
         height: 100%;
         display: flex;
         align-items: center;

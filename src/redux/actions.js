@@ -7,7 +7,8 @@ export const GET_GENRES_FAILURE = 'GET_MOVIES_FAILURE';
 export const GET_MOVIEBYID_REQUEST = 'GET_MOVIEBYID_REQUEST';
 export const GET_MOVIEBYID_SUCCESS = 'GET_MOVIEBYID_SUCCESS';
 export const GET_MOVIEBYID_FAILURE = 'GET_MOVIEBYID_FAILURE';
-export function getFilm(currentPage, searchQuery, id, sort, findId) {
+
+export function getFilm(currentPage, searchQuery, id, sort) {
   const dataURl =
     !sort && !searchQuery
       ? `https://api.themoviedb.org/3/discover/movie?api_key=debadca3a2c163df2dfbed23bec2cb9f&language=en-US&sort_by=original_title.asc&include_adult=false&include_video=false&page=${currentPage}${
@@ -29,7 +30,6 @@ export function getFilm(currentPage, searchQuery, id, sort, findId) {
         }&page=${currentPage}${
           sort === 'top_rated' ? `&vote_count.gte=100` : ''
         }${id ? `&with_genres=${id}` : ''}`;
-  console.log(dataURl);
   return dispatch => {
     dispatch({ type: GET_MOVIES_REQUEST });
 

@@ -8,12 +8,16 @@
     padding: 30px;
     flex-wrap: wrap;
   }
+  &__rated {
+    color: yellow;
+    font-size: 30px;
+  }
   &__poster {
     width: 40%;
     margin-top: 90px;
     height: 400px;
     padding: 10px;
-    background-image: url(../../notFound.jpg);
+    background-image: url(../../img/notFound.jpg);
     background-size: cover;
     color: white;
     display: flex;

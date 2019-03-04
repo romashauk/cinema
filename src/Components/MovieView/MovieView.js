@@ -13,8 +13,40 @@ class MovieView extends Component {
     currentPage: 1,
     quantityPage: 1000,
   };
-  getFilm = (a, b, c, d, e) => {
-    this.props.dispatch(actions.getFilm(a, b, c, d, e));
+  getFilm = (...args) => {
+    this.props.dispatch(actions.getFilm(...args));
+  };
+  rateCreater = rate => {
+    const rateRes = [];
+    let rateRound = Math.floor(rate);
+    for (let i = 0; i < rateRound; i++) {
+      rateRes.push(1);
+    }
+    if (rate - rateRound >= 0.5) {
+      rateRes.push(2);
+    }
+    if (Math.round(rate) < 9 || rate < 8) {
+      let min = Math.ceil(9 - rate);
+      for (let i = 0; i < min; i++) {
+        rateRes.push(0);
+      }
+      if (rate - rateRound >= 0.5) {
+        rateRes.pop();
+      }
+    }
+    return (
+      <>
+        {rate === 0
+          ? null
+          : rateRes.map(item =>
+              item === 1 ? (
+                <i class="fas fa-star" />
+              ) : <i class="fas fa-star-half-alt" /> || item === 0 ? (
+                <i class="far fa-star" />
+              ) : null
+            )}
+      </>
+    );
   };
   componentDidMount() {
     const { dispatch, searchQuery, id, sort } = this.props;
@@ -40,7 +72,14 @@ class MovieView extends Component {
                 {results.length !== 0 ? (
                   <ul className="Main__list">
                     {results.map(item => (
-                      <MovieItem key={item.id} item={item} />
+                      <MovieItem
+                        {...this.props}
+                        getFilm={this.getFilm}
+                        key={item.id}
+                        item={item}
+                        voteAverage={item.vote_average}
+                        rateCreater={this.rateCreater}
+                      />
                     ))}
                   </ul>
                 ) : (
