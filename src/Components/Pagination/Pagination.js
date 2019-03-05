@@ -1,28 +1,6 @@
 import React, { Component } from 'react';
 
 export default class Pagination extends Component {
-  paginationItems = [];
-
-  createPaginationBtns = () => {
-    this.paginationItems = [];
-    for (let i = this.props.currentPage; i < this.props.currentPage + 5; i++) {
-      this.paginationItems.push(i);
-    }
-    for (let i = this.props.currentPage; i >= this.props.currentPage - 5; i--) {
-      this.paginationItems.unshift(i);
-    }
-
-    this.paginationItems = this.paginationItems.filter((item, index) => {
-      if (
-        this.paginationItems.indexOf(item) === index &&
-        item > 1 &&
-        item < this.props.quantityPages - 1
-      ) {
-        return true;
-      }
-    });
-  };
-
   render() {
     const {
       getFilm,
@@ -32,7 +10,14 @@ export default class Pagination extends Component {
       searchQuery,
       id,
     } = this.props;
-    this.createPaginationBtns();
+    const buttons = [];
+    const start = Math.max(1, currentPage - 5);
+    const end = Math.min(quantityPages, currentPage + 5);
+
+    for (let i = start; i < end; i++) {
+      buttons.push(i);
+    }
+
     return (
       <>
         <div className="Pagination">
@@ -46,23 +31,25 @@ export default class Pagination extends Component {
             >
               Prev
             </button>
-            <div
-              className={`Pagination__nav-btn ${
-                currentPage === 1 ? 'Pagination__nav-btn--active' : ''
-              }`}
-              onClick={() => {
-                getFilm(1, searchQuery, id, sort);
-              }}
-            >
-              1
-            </div>
+            {currentPage !== 1 && currentPage > 6 ? (
+              <div
+                className={`Pagination__nav-btn ${
+                  currentPage === 1 ? 'Pagination__nav-btn--active' : ''
+                }`}
+                onClick={() => {
+                  getFilm(1, searchQuery, id, sort);
+                }}
+              >
+                1
+              </div>
+            ) : null}
 
-            {currentPage >= 5 ? (
+            {currentPage >= 7 ? (
               <div className="Pagination__nav-btn">...</div>
             ) : (
               ''
             )}
-            {this.paginationItems.map((item, index) => {
+            {buttons.map((item, index) => {
               return (
                 <div
                   key={index}
@@ -85,7 +72,7 @@ export default class Pagination extends Component {
             )}
 
             <div
-              hidden={this.paginationItems.length === 0}
+              hidden={buttons.length === 0}
               className={`Pagination__nav-btn ${
                 currentPage === quantityPages
                   ? 'Pagination__nav-btn--active'

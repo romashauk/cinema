@@ -4,22 +4,11 @@ import { Link } from 'react-router-dom';
 export default class MovieItem extends Component {
   render() {
     const item = this.props.item;
-    const {
-      getFilm,
-      id,
-      sort,
-      searchQuery,
-      currentPage,
-      voteAverage,
-      rateCreater,
-    } = this.props;
+    const { voteAverage, rateCreater } = this.props;
     return (
       <>
         <li className="Main__item" key={item.id}>
-          <Link
-            onClick={() => getFilm(currentPage, searchQuery, id, sort)}
-            to={`/` + item.id}
-          >
+          <Link to={`/` + item.id}>
             <div className="Main__item-poster">
               {' '}
               {item.poster_path ? (

@@ -31,11 +31,12 @@ class MovieDetails extends Component {
       <>
         {rate === 0
           ? null
-          : rateRes.map(item =>
+          : rateRes.map((item, i) =>
               item === 1 ? (
-                <i class="fas fa-star" />
-              ) : <i class="fas fa-star-half-alt" /> || item === 0 ? (
-                <i class="far fa-star" />
+                <i key={i} className="fas fa-star" />
+              ) : <i key={i} className="fas fa-star-half-alt" /> ||
+                item === 0 ? (
+                <i key={i} className="far fa-star" />
               ) : null
             )}
       </>
